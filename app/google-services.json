@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "143961351606",
+    "project_id": "eisenhower-matrix-988b9",
+    "storage_bucket": "eisenhower-matrix-988b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143961351606:android:23b633623968d4a40e4d17",
+        "android_client_info": {
+          "package_name": "com.peter.eisenhowermatrix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143961351606-fp6uhfa1qs4442t8hm53iof1kpt1vd2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfyvAUPAn9BPJ34T7djZ8m6EYWEfQ6Pr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143961351606-fp6uhfa1qs4442t8hm53iof1kpt1vd2d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

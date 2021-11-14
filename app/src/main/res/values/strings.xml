@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Eisenhower Matrix</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="add">Add</string>
+    <string name="do_it_now">Do it Now</string>
+    <string name="urgent_amp_important"><![CDATA[Urgent & Important]]></string>
+    <string name="decide_when_to_do">Decide when to do</string>
+    <string name="not_urgent_amp_important"><![CDATA[Not Urgent & Important]]></string>
+    <string name="delegate_it">Delegate It</string>
+    <string name="urgent_amp_not_important"><![CDATA[Urgent & Not Important]]></string>
+    <string name="dump_it">Dump It!</string>
+    <string name="not_urgent_amp_not_important"><![CDATA[Not Urgent & Not Important]]></string>
+    <string name="assign_it">Assign It</string>
+    <string name="needs_your_action">Needs Your Action</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="sharing_not_available">Can\'t Share now</string>
+</resources>

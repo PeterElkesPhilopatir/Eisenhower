@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/fragment_loginregister_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:text="@={viewModel.email}" />
+
+        <EditText
+            android:id="@+id/fragment_loginregister_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:text="@={viewModel.password}" />
+
+
+
+            <Button
+                android:id="@+id/fragment_loginregister_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:onClick="@{() -> viewModel.login()}"
+                android:text="Login"
+                android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/fragment_loginregister_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="#00000000"
+            android:textStyle="bold"
+            android:onClick="@{() -> viewModel.register()}"
+            android:text="Create New Account"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_500" />
+
+
+    </LinearLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.peter.eisenhowermatrix.ui.auth.LoginRegisterViewModel" />
+    </data>
+</layout>

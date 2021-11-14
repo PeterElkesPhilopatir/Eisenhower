@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginRegisterFragment">
+
+    <fragment
+        android:id="@+id/loginRegisterFragment"
+        android:name="com.peter.eisenhowermatrix.ui.auth.LoginRegisterFragment"
+        android:label="LoginRegisterFragment"
+        tools:layout="@layout/fragment_login_register">
+        <action
+            android:id="@+id/action_loginRegisterFragment_to_loggedInFragment"
+            app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.peter.eisenhowermatrix.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_loggedInFragment_to_loginRegisterFragment"
+            app:destination="@id/loginRegisterFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_tasksTypeFragment"
+            app:destination="@id/tasksTypeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.peter.eisenhowermatrix.ui.add_task.AddTaskFragment"
+        android:label="AddTaskFragment"
+        tools:layout="@layout/fragment_add_task">
+        <action
+            android:id="@+id/action_addTaskFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_addTaskFragment_to_taskProfileFragment"
+            app:destination="@id/taskProfileFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskProfileFragment"
+        android:name="com.peter.eisenhowermatrix.ui.task_profile.TaskProfileFragment"
+        android:label="TaskProfileFragment"
+        tools:layout="@layout/fragment_task_profile">
+        <argument
+            android:name="task"
+            app:argType="com.peter.eisenhowermatrix.pojo.Task" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tasksTypeFragment"
+        android:name="com.peter.eisenhowermatrix.ui.tasks_by_type.TasksTypeFragment"
+        android:label="TasksTypeFragment"
+        tools:layout="@layout/fragment_tasks_type">
+        <argument
+            android:name="type"
+            app:argType="com.peter.eisenhowermatrix.pojo.TaskType" />
+        <action
+            android:id="@+id/action_tasksTypeFragment_to_taskProfileFragment"
+            app:destination="@id/taskProfileFragment" />
+    </fragment>
+
+</navigation>
