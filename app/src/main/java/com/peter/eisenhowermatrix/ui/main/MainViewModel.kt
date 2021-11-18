@@ -124,4 +124,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun onTypeNavigationCompleted() {
         _selectedType.value = null
     }
+
+    fun onLogout() {
+        authAppRepository.logOut()
+    }
 }

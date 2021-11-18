@@ -1,5 +1,6 @@
 package com.peter.eisenhowermatrix.ui.auth
 
+import android.app.Activity
 import com.google.firebase.auth.FirebaseUser
 
 import androidx.lifecycle.MutableLiveData
@@ -30,5 +31,10 @@ class LoginRegisterViewModel(application: Application) : AndroidViewModel(applic
     init {
         authAppRepository = AuthAppRepository(application)
         userLiveData = authAppRepository.userLiveData
+    }
+
+    fun signInGoogle(activity: Activity){
+//        val signInIntent = googleSignInClient.signInIntent
+//        application.startActivityForResult(signInIntent, 9001)
     }
 }

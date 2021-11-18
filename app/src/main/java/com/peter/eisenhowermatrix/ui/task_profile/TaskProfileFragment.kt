@@ -3,6 +3,7 @@ package com.peter.eisenhowermatrix.ui.task_profile
 import android.content.ActivityNotFoundException
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -36,41 +37,39 @@ class TaskProfileFragment : Fragment() {
         ).get(TaskProfileViewModel::class.java)
         binding.viewModel = viewModel
         binding.setLifecycleOwner(this)
-
         binding.edtTitle.setText(task.title)
         binding.edtDesc.setText(task.description)
-
         viewModel.type.observe(viewLifecycleOwner, Observer {
             if (it != null)
                 changeColor(it)
             else Log.e("TASK_CHANGE_COLOR", "NULL")
         })
-
         viewModel.message.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
                 viewModel.onMessageDisplayCompleted()
             }
         })
-
-        viewModel.back.observe(viewLifecycleOwner,{
-            if (it)
-            {
+        viewModel.back.observe(viewLifecycleOwner, {
+            if (it) {
                 requireFragmentManager().popBackStack()
                 viewModel.onDeleteClickedCompleted()
             }
         })
-
-        viewModel.share.observe(viewLifecycleOwner,{
-            if (it!=null) {
+        viewModel.share.observe(viewLifecycleOwner, {
+            if (it != null) {
                 onShare(it)
             }
         })
         viewModel.isDone.observe(viewLifecycleOwner, Observer {
-            if(it)
+            binding.edtTitle.isEnabled = !it
+            binding.edtDesc.isEnabled = !it
+            if (it)
                 binding.btnFinish.visibility = View.GONE
+
             if (!it)
                 binding.btnFinish.visibility = View.VISIBLE
+
         })
         setHasOptionsMenu(true)
         return binding.root
@@ -122,15 +121,15 @@ class TaskProfileFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                R.id.save_menu -> viewModel.onSaveClicked()
-                R.id.delete_menu -> viewModel.onDeleteClicked()
-                R.id.share_menu -> viewModel.onShareClicked()
-            }
+        when (item.itemId) {
+            R.id.save_menu -> viewModel.onSaveClicked()
+            R.id.delete_menu -> viewModel.onDeleteClicked()
+            R.id.share_menu -> viewModel.onShareClicked()
+        }
         return true
     }
 
-    private fun onShare(message : String) {
+    private fun onShare(message: String) {
         val shareIntent = activity?.let {
             ShareCompat.IntentBuilder.from(it)
                 .setText(message)

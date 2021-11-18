@@ -56,22 +56,31 @@ class TaskProfileViewModel(task: Task, app: Application) :
 
 
     fun onType1Clicked() {
+        if (!_isDone.value!!)
         _type.value = TaskType.IMPORTANT_URGENT
     }
 
     fun onType2Clicked() {
+        if (!_isDone.value!!)
+
         _type.value = TaskType.IMPORTANT_NOT_URGENT
     }
 
     fun onType3Clicked() {
+        if (!_isDone.value!!)
+
         _type.value = TaskType.NOT_IMPORTANT_URGENT
     }
 
     fun onType4Clicked() {
+        if (!_isDone.value!!)
+
         _type.value = TaskType.NOT_IMPORTANT_NOT_URGENT
     }
 
     fun onTypeUndefinedClicked() {
+        if (!_isDone.value!!)
+
         _type.value = TaskType.UNDEFINED
     }
 

@@ -50,7 +50,7 @@ fun bindCardBG(linearLayout: LinearLayout, data: TaskType?) {
             linearLayout.setBackgroundColor(linearLayout.context.resources.getColor(R.color.type4))
 
         TaskType.UNDEFINED ->
-            linearLayout.setBackgroundColor(linearLayout.context.resources.getColor(R.color.type_undefined))
+            linearLayout.setBackgroundColor(linearLayout.context.resources.getColor(R.color.type1))
 
 
     }

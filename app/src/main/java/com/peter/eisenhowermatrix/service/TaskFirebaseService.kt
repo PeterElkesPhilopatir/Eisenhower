@@ -12,7 +12,7 @@ import com.peter.eisenhowermatrix.pojo.Task
 import com.peter.eisenhowermatrix.pojo.TaskType
 import kotlinx.coroutines.runBlocking
 
-class TaskFirebaseService (){
+class TaskFirebaseService() {
 
 //    private val authAppRepository: AuthAppRepository
 //    val userLiveData: MutableLiveData<FirebaseUser?>
@@ -22,7 +22,7 @@ class TaskFirebaseService (){
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val myRef: DatabaseReference = database.getReference(reference)
     var count1 = MutableLiveData<String>()
-    
+
     fun initTask(user: String): String { // returns key only!!!
         var key = ""
         return try {
@@ -61,7 +61,7 @@ class TaskFirebaseService (){
         }
     }
 
-    fun counter1(user: String,liveData: MutableLiveData<String>) : String {
+    fun counter1(user: String, liveData: MutableLiveData<String>): String {
         var result = 0
         runBlocking {
             myRef.child(user).orderByChild("type").equalTo(TaskType.IMPORTANT_URGENT.value)
@@ -69,8 +69,9 @@ class TaskFirebaseService (){
                     override fun onDataChange(snapshot: DataSnapshot) {
                         result = 0
                         for (postSnapshot in snapshot.children) {
-                            Log.i("DATA1",postSnapshot.toString())
-                            result++
+                            Log.i("DATA1", postSnapshot.toString())
+                            if (!postSnapshot.getValue(Task::class.java)!!.isDone)
+                                result++
                         }
                         liveData.postValue(result.toString())
                     }
@@ -85,7 +86,8 @@ class TaskFirebaseService (){
 
         return result.toString()
     }
-    fun counter2(user: String,liveData: MutableLiveData<String>) : String {
+
+    fun counter2(user: String, liveData: MutableLiveData<String>): String {
         var result = 0
         runBlocking {
             myRef.child(user).orderByChild("type").equalTo(TaskType.IMPORTANT_NOT_URGENT.value)
@@ -93,8 +95,9 @@ class TaskFirebaseService (){
                     override fun onDataChange(snapshot: DataSnapshot) {
                         result = 0
                         for (postSnapshot in snapshot.children) {
-                            Log.i("DATA2",postSnapshot.toString())
-                            result++
+                            Log.i("DATA2", postSnapshot.toString())
+                            if (!postSnapshot.getValue(Task::class.java)!!.isDone)
+                                result++
                         }
                         liveData.postValue(result.toString())
                     }
@@ -109,7 +112,8 @@ class TaskFirebaseService (){
 
         return result.toString()
     }
-    fun counter3(user: String,liveData: MutableLiveData<String>) : String {
+
+    fun counter3(user: String, liveData: MutableLiveData<String>): String {
         var result = 0
         runBlocking {
             myRef.child(user).orderByChild("type").equalTo(TaskType.NOT_IMPORTANT_URGENT.value)
@@ -117,8 +121,10 @@ class TaskFirebaseService (){
                     override fun onDataChange(snapshot: DataSnapshot) {
                         result = 0
                         for (postSnapshot in snapshot.children) {
-                            Log.i("DATA3",postSnapshot.toString())
-                            result++
+                            Log.i("DATA3", postSnapshot.toString())
+                            if (!postSnapshot.getValue(Task::class.java)!!.isDone)
+
+                                result++
                         }
                         liveData.postValue(result.toString())
                     }
@@ -133,7 +139,8 @@ class TaskFirebaseService (){
 
         return result.toString()
     }
-    fun counter4(user: String,liveData: MutableLiveData<String>) : String {
+
+    fun counter4(user: String, liveData: MutableLiveData<String>): String {
         var result = 0
         runBlocking {
             myRef.child(user).orderByChild("type").equalTo(TaskType.NOT_IMPORTANT_NOT_URGENT.value)
@@ -142,7 +149,8 @@ class TaskFirebaseService (){
                         result = 0
                         for (postSnapshot in snapshot.children) {
                             Log.i("DATA4", postSnapshot.toString())
-                            result++
+                            if (!postSnapshot.getValue(Task::class.java)!!.isDone)
+                                result++
                         }
                         liveData.postValue(result.toString())
                     }
@@ -157,7 +165,8 @@ class TaskFirebaseService (){
 
         return result.toString()
     }
-    fun counterUndefined(user: String,liveData: MutableLiveData<String>) : String {
+
+    fun counterUndefined(user: String, liveData: MutableLiveData<String>): String {
         var result = 0
         runBlocking {
             myRef.child(user).orderByChild("type").equalTo(TaskType.UNDEFINED.value)
@@ -182,7 +191,7 @@ class TaskFirebaseService (){
         return result.toString()
     }
 
-    fun fetchTasks(user : String,type: TaskType,liveData: MutableLiveData<List<Task>>) {
+    fun fetchTasks(user: String, type: TaskType, liveData: MutableLiveData<List<Task>>) {
         myRef.child(user)
             .orderByChild("type").equalTo(type.value)
             .addValueEventListener(object : ValueEventListener {
@@ -194,7 +203,7 @@ class TaskFirebaseService (){
 //                        Log.i("TASKS",postSnapshot.toString())
 //                        tasks.add(postSnapshot.getValue(Task::class.java)!!)
 //                    }
-                  var  tasks = snapshot.children.map { dataSnapshot ->
+                    var tasks = snapshot.children.map { dataSnapshot ->
                         dataSnapshot.getValue(Task::class.java)!!
                     }
                     liveData.postValue(tasks)
@@ -211,11 +220,13 @@ class TaskFirebaseService (){
         SUCCESS("SUCCESS"),
         FAILURE("FAILURE"),
     }
+
     init {
 //        authAppRepository = AuthAppRepository()
 //        userLiveData = authAppRepository.userLiveData
 //        count1.value = getCounter1(userLiveData.value!!.uid)
     }
+
     class Counters {
         var type1: Int = 0;
         var type2: Int = 0;

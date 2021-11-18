@@ -1,10 +1,8 @@
 package com.peter.eisenhowermatrix.ui.main
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -26,7 +24,13 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         binding.viewModel = viewModel
         binding.setLifecycleOwner(this)
-
+        viewModel.loggedOutLiveData.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                findNavController().navigate(
+                    MainFragmentDirections.actionLoggedInFragmentToLoginRegisterFragment()
+                )
+            }
+        })
         viewModel.navToAdd.observe(viewLifecycleOwner, Observer {
             if (it) {
                 findNavController().navigate(
@@ -43,6 +47,19 @@ class MainFragment : Fragment() {
                 viewModel.onTypeNavigationCompleted()
             }
         })
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.logout_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout_menu -> viewModel.logOut()
+        }
+        return true
     }
 }

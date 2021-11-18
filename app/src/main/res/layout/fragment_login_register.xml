@@ -1,35 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+
+        android:layout_marginTop="50dp"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/fragment_loginregister_email"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:text="@={viewModel.email}" />
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/email">
 
+            <EditText
+                android:text="@={viewModel.email}"
+                android:layout_width="match_parent"
+                android:id="@+id/edt_desc"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/password">
         <EditText
+            android:layout_marginTop="20dp"
             android:id="@+id/fragment_loginregister_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Password"
             android:inputType="textPassword"
             android:text="@={viewModel.password}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/fragment_loginregister_login"
+                android:elevation="10dp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -46,11 +69,11 @@
             android:layout_margin="20dp"
             android:background="#00000000"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:onClick="@{() -> viewModel.register()}"
-            android:text="Create New Account"
+            android:text="@string/create_new_account"
             android:textAllCaps="false"
             android:textColor="@color/purple_500" />
-
 
     </LinearLayout>
 

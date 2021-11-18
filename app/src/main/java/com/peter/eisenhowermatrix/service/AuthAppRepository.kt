@@ -19,6 +19,7 @@ import android.app.Application
 import android.content.Context
 import android.provider.Settings.Global.getString
 import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.peter.eisenhowermatrix.R
 
@@ -34,8 +35,12 @@ class AuthAppRepository(private val application: Application) {
                 .addOnCompleteListener(application.mainExecutor,
                     { task ->
                         if (task.isSuccessful) {
-                            userLiveData.postValue(firebaseAuth.currentUser)
-                            Toast.makeText(application.applicationContext,"Welcome " + userLiveData.value!!.email,Toast.LENGTH_SHORT).show()
+                            userLiveData.value = firebaseAuth.currentUser
+                            Toast.makeText(
+                                application.applicationContext,
+                                "Welcome " + firebaseAuth.currentUser!!.email,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             Toast.makeText(
                                 application.applicationContext,
@@ -53,8 +58,8 @@ class AuthAppRepository(private val application: Application) {
                 .addOnCompleteListener(application.mainExecutor,
                     { task ->
                         if (task.isSuccessful) {
-                            userLiveData.postValue(firebaseAuth.currentUser)
-                            login(email,password)
+                            userLiveData.value = firebaseAuth.currentUser
+                            login(email, password)
                         } else {
                             Toast.makeText(
                                 application.applicationContext,
@@ -69,17 +74,19 @@ class AuthAppRepository(private val application: Application) {
     fun logOut() {
         firebaseAuth.signOut()
         loggedOutLiveData.postValue(true)
+        userLiveData.postValue(null)
     }
 
     init {
         firebaseAuth = FirebaseAuth.getInstance()
-        userLiveData  = MutableLiveData()
+        userLiveData = MutableLiveData()
         loggedOutLiveData = MutableLiveData()
         if (firebaseAuth.currentUser != null) {
             userLiveData.value = firebaseAuth.currentUser
             loggedOutLiveData.postValue(false)
         } else {
-            Log.e("ERROR","current user is null")
+            Log.e("ERROR", "current user is null")
         }
     }
+
 }
