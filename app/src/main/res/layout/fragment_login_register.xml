@@ -73,7 +73,7 @@
             android:onClick="@{() -> viewModel.register()}"
             android:text="@string/create_new_account"
             android:textAllCaps="false"
-            android:textColor="@color/purple_500" />
+            android:textColor="@color/primary" />
 
     </LinearLayout>
 
